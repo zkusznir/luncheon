@@ -5,13 +5,13 @@ feature 'Logging in' do
     configure_omniauth
   end
 
-  scenario 'Log in' do
+  scenario 'User logs in' do
     login
     expect(page).to have_content 'Hi, John Doe!'
     expect(User.last.name).to eq('John Doe')
   end
 
-  scenario 'Log out' do
+  scenario 'User logs out' do
     login
     click_link 'Log out'
     expect(page).to have_content 'Bye, bye!'
