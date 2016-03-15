@@ -12,11 +12,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rspec-rails'
 gem 'omniauth-facebook'
 gem 'react-rails', '~> 1.6.0'
-gem 'factory_girl'
 
 group :development, :test do
   gem 'pry'
   gem 'capybara'
+  gem 'factory_girl_rails'
 end
 
 group :development do
