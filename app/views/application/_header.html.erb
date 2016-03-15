@@ -1,0 +1,6 @@
+<%= flash[:notice] %>
+<% if current_user %>
+  <%= link_to 'Log out', logout_path %>
+<% else %>
+  <%= link_to 'Log in with facebook', login_path %>
+<% end %>
