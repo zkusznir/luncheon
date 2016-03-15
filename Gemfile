@@ -14,6 +14,7 @@ gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'pry'
+  gem 'capybara'
 end
 
 group :development do
