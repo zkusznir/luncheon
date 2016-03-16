@@ -17,10 +17,10 @@ OrderList = React.createClass({
       }.bind(this)
     });
   },
-   render: function () {
+  render: function () {
     var orderNodes = this.state.orders.map(function (order, index) {
       return (
-        <Order name={order.restaurant_name} status={order.status} key={index} />
+        <Order id={order.id} name={order.restaurant_name} status={order.status} key={index} />
       );
     });
     return (
