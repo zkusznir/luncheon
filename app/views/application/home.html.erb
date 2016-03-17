@@ -1,1 +1,5 @@
-<%= react_component 'OrderBox' %>
+<% if current_user %>
+  <%= react_component 'OrderBox' %>
+<% else %>
+  <%= react_component 'LoginForm' %>
+<% end %>

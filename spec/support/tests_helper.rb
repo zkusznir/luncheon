@@ -7,8 +7,8 @@ module TestsHelper
   end
 
   def login
-    visit '/'
-    click_link 'Log in with facebook'
+    visit root_path
+    click_link 'Log in with Facebook'
   end
 end
 

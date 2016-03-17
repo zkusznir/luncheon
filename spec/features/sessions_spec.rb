@@ -5,10 +5,15 @@ feature 'Logging in' do
     configure_omniauth
   end
 
+  scenario 'User visits main page not being logged in' do
+    visit root_path
+    expect(page).to have_content 'You have to be logged in to enter!'
+  end
+
   scenario 'User logs in' do
     login
     expect(page).to have_content 'Hi, John Doe!'
-    expect(User.last.name).to eq('John Doe')
+    expect(User.last.name).to eq 'John Doe'
   end
 
   scenario 'User logs out' do
