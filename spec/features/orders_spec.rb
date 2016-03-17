@@ -9,7 +9,7 @@ feature 'Orders management' do
   end
 
   scenario 'User visits main page' do
-    expect(page).to have_content 'Burger Love ()'
+    expect(page).to have_content 'Burger Love'
     expect(page).to have_content 'Gonzales 21.5'
   end
 

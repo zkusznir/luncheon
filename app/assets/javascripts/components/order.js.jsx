@@ -1,8 +1,9 @@
 Order = React.createClass({
   getInitialState: function() {
-    return { meals: [] };
+    return { status: null, meals: [] };
   },
   componentDidMount: function() {
+    this.setState({ status: this.props.status });
     this.getMeals(this.props.id);
   },
   getMeals: function(order_id) {
@@ -31,9 +32,23 @@ Order = React.createClass({
       }.bind(this)
     });
   },
+  handleStatusChange: function(status) {
+    $.ajax({
+      url: 'orders/' + this.props.id + '.json',
+      dataType: 'json',
+      type: 'PUT',
+      data: status,
+      success: function(data) {
+        this.setState({ status: data.status });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('orders/' + this.props.id + '.json', status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function() {
     var mealForm;
-    if (!this.props.status) {
+    if (this.state.status != 'Finalized') {
       mealForm = <MealForm onMealSubmit={this.handleMealSubmit} />;
     }
     var mealNodes = this.state.meals.map(function(meal, index) {
@@ -43,7 +58,10 @@ Order = React.createClass({
     });
     return (
       <div>
-        <p>{this.props.name} ({this.props.status})</p>
+        <span>
+          {this.props.name}
+          <OrderStatusForm status={this.state.status} onStatusChange={this.handleStatusChange} />
+        </span>
         <ul>
           {mealNodes}
         </ul>

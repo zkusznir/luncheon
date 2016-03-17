@@ -9,6 +9,12 @@ class OrdersController < ApplicationController
     render json: @order.to_json if @order.save
   end
 
+  def update
+    @order = Order.find(params[:id])
+    @order.update(status: params[:status])
+    render json: @order.to_json
+  end
+
   private
 
   def order_params
