@@ -16,7 +16,7 @@ var OrderForm = React.createClass({
       <form onSubmit={this.handleAddOrderClick}>
         <label>New order</label>
         <input id="order-form" placeholder="Restaurant name" onChange={this.handleInputChange} ref="body" />
-        <input type="submit" value="Add" />
+        <input type="submit" value="Create order" />
       </form>
     );
   }

@@ -17,7 +17,25 @@ Order = React.createClass({
       }.bind(this)
     });
   },
+  handleMealSubmit: function(meal) {
+    $.ajax({
+      url: 'orders/' + this.props.id + '/meals.json',
+      dataType: 'json',
+      type: 'POST',
+      data: meal,
+      success: function(data) {
+        this.setState({ meals: data });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('orders/' + this.props.id  + '/meals.json', status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function() {
+    var mealForm;
+    if (!this.props.status) {
+      mealForm = <MealForm onMealSubmit={this.handleMealSubmit} />;
+    }
     var mealNodes = this.state.meals.map(function(meal, index) {
       return (
         <Meal name={meal.name} price={meal.price} key={index} />
@@ -29,6 +47,7 @@ Order = React.createClass({
         <ul>
           {mealNodes}
         </ul>
+        {mealForm}
       </div>
     );
   }

@@ -6,7 +6,6 @@ FactoryGirl.define do
 
   factory :order do
     restaurant_name 'Burger Love'
-    status 'Delivered'
   end
 
   factory :meal do

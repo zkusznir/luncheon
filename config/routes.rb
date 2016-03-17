@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :orders, only: :create
   resources :orders, only: :index do
-    resources :meals, only: :index
+    resources :meals, only: [:index, :create]
   end
   
   get 'auth/facebook', as: :login
