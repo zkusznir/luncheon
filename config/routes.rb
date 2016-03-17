@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'application#home'
 
+  resources :orders, only: :create
   resources :orders, only: :index do
     resources :meals, only: :index
   end

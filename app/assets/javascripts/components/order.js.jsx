@@ -20,7 +20,7 @@ Order = React.createClass({
   render: function() {
     var mealNodes = this.state.meals.map(function(meal, index) {
       return (
-        <Meal name={meal.name} price={meal.price} />
+        <Meal name={meal.name} price={meal.price} key={index} />
       );
     });
     return (
