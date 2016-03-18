@@ -2,13 +2,17 @@ var OrderBox = React.createClass({
   getInitialState: function() {
     return { orders: [] };
   },
-  componentDidMount: function() {
+  componentWillMount: function() {
     this.getOrders();
   },
-  getOrders: function() {
+  handleChangeOrdersType: function(e) {
+    this.getOrders({ type: e.target.id });
+  },
+  getOrders: function(type) {
     $.ajax({
       url: 'orders.json',
       dataType: 'json',
+      data: type,
       success: function(data) {
         this.setState({ orders: data });
       }.bind(this),
@@ -35,6 +39,8 @@ var OrderBox = React.createClass({
     return (
       <div>
         <OrderForm onOrderSubmit={this.handleOrderSubmit} />
+        <button id="active" onClick={this.handleChangeOrdersType}>Active</button>
+        <button id="history" onClick={this.handleChangeOrdersType}>History</button>
         <OrderList orders={this.state.orders} />
       </div>
     );

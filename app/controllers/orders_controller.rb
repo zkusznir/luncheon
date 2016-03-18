@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
   def index
-    @orders = Order.all
+    @orders = params[:type] == 'history' ? Order.history : Order.active
     render json: @orders.to_json
   end
 
   def create
-    @order = Order.new(restaurant_name: order_params[:name])
+    @order = Order.new(restaurant_name: order_params[:name], status: 'Opened')
     render json: @order.to_json if @order.save
   end
 

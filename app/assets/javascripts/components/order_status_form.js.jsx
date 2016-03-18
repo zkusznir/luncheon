@@ -6,6 +6,7 @@ OrderStatusForm = React.createClass({
     return (
       <div>
         <select id="order-status" value={this.props.status} onChange={this.handleChange}>
+          <option value="Opened">Opened</option>
           <option value="Finalized">Finalized</option>
           <option value="Ordered">Ordered</option>
           <option value="Delivered">Delivered</option>

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 feature 'Orders management' do
-  given(:order) { create(:order, restaurant_name: 'Osiem misek') }
-
   background do
     create(:meal)
+    create(:order)
+    create(:order, status: 'Finalized')
     login
   end
 
@@ -14,9 +14,31 @@ feature 'Orders management' do
   end
 
   scenario 'User adds a new order' do
-    fill_in 'Restaurant name', with: order.restaurant_name
+    fill_in 'Restaurant name', with: 'Osiem misek'
     click_button 'Create order'
     expect(page).to have_css '#order-form', text: ''
     expect(page).to have_content 'Osiem misek'
+  end
+
+  scenario 'User selects to view finalized and archived orders' do
+    expect(page).to have_css '.order', count: 2
+    expect(page).to have_select 'order-status', selected: 'Opened'
+    click_button 'History'
+    expect(page).to have_select 'order-status', selected: 'Finalized'
+    expect(page).to have_css '.order', count: 1
+  end
+end
+
+feature 'Status change' do
+  background do
+    create(:order)
+    login
+  end
+
+  scenario 'User changes order status' do
+    expect(page).to have_button 'Add'
+    select 'Finalized', from: 'order-status'
+    expect(page).not_to have_button 'Add'
+    expect(page).to have_select 'order-status', selected: 'Finalized'
   end
 end

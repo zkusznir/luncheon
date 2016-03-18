@@ -24,15 +24,7 @@ feature 'Meals management' do
   end
 
   scenario 'User cannot add a meal to closed order' do
-    create(:order, status: 'Delivered')
+    create(:order)
     expect(page).to have_css '#meal-form-name', count: 0
-  end
-
-  scenario 'User changes order status' do
-    create(:order, status: 'Delivered')
-    expect(page).to have_button 'Add'
-    select 'Finalized', from: 'order-status'
-    expect(page).not_to have_button 'Add'
-    expect(page).to have_select 'order-status', selected: 'Finalized'
   end
 end

@@ -2,9 +2,12 @@ Order = React.createClass({
   getInitialState: function() {
     return { status: null, meals: [] };
   },
-  componentDidMount: function() {
+  componentWillMount: function() {
     this.setState({ status: this.props.status });
     this.getMeals(this.props.id);
+  },
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({ status: nextProps.status });
   },
   getMeals: function(order_id) {
     $.ajax({
@@ -40,6 +43,7 @@ Order = React.createClass({
       data: status,
       success: function(data) {
         this.setState({ status: data.status });
+        forceUpdate();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error('orders/' + this.props.id + '.json', status, err.toString());
@@ -57,7 +61,7 @@ Order = React.createClass({
       );
     });
     return (
-      <div>
+      <div className="order">
         <span>
           {this.props.name}
           <OrderStatusForm status={this.state.status} onStatusChange={this.handleStatusChange} />
