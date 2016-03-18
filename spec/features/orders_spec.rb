@@ -25,6 +25,7 @@ feature 'Orders management' do
     expect(page).to have_select 'order-status', selected: 'Opened'
     click_button 'History'
     expect(page).to have_select 'order-status', selected: 'Finalized'
+    expect(page).not_to have_content 'Gonzales'
     expect(page).to have_css '.order', count: 1
   end
 end

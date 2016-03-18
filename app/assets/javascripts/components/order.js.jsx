@@ -8,6 +8,7 @@ Order = React.createClass({
   },
   componentWillReceiveProps: function(nextProps) {
     this.setState({ status: nextProps.status });
+    if (this.props != nextProps) { this.getMeals(nextProps.id) };
   },
   getMeals: function(order_id) {
     $.ajax({
@@ -43,7 +44,6 @@ Order = React.createClass({
       data: status,
       success: function(data) {
         this.setState({ status: data.status });
-        forceUpdate();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error('orders/' + this.props.id + '.json', status, err.toString());
