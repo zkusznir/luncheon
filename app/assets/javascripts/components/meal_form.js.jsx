@@ -4,6 +4,7 @@ var MealForm = React.createClass({
     ReactDOM.findDOMNode(this.refs.price).value = "";
   },
   handleAddMealClick: function(e) {
+    e.preventDefault();
     var name = ReactDOM.findDOMNode(this.refs.meal).value.trim();
     var price = ReactDOM.findDOMNode(this.refs.price).value.trim();
     if (!name && !price) return;

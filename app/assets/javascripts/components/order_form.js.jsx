@@ -6,6 +6,7 @@ var OrderForm = React.createClass({
     this.setState({ restaurantName: e.target.value.trim() });
   },
   handleAddOrderClick: function(e) {
+    e.preventDefault();
     if (!this.state.restaurantName) return;
     ReactDOM.findDOMNode(this.refs.body).value = "";
     this.setState({ restaurantName: "" });
