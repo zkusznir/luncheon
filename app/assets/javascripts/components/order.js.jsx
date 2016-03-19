@@ -11,44 +11,19 @@ Order = React.createClass({
     if (this.props != nextProps) { this.getMeals(nextProps.id) };
   },
   getMeals: function(order_id) {
-    $.ajax({
-      url: 'orders/' + order_id  + '/meals.json',
-      dataType: 'json',
-      success: function(data) {
-        this.setState({ meals: data });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('orders/' + order_id  + '/meals.json', status, err.toString());
-      }.bind(this)
-    });
+    Luncheon.backend('orders/' + order_id  + '/meals.json', 'GET', '').then(
+      function(data) { this.setState({ meals: data });
+    }.bind(this));
   },
   handleMealSubmit: function(meal) {
-    $.ajax({
-      url: 'orders/' + this.props.id + '/meals.json',
-      dataType: 'json',
-      type: 'POST',
-      data: meal,
-      success: function(data) {
-        this.setState({ meals: data });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('orders/' + this.props.id  + '/meals.json', status, err.toString());
-      }.bind(this)
-    });
+    Luncheon.backend('orders/' + this.props.id  + '/meals.json', 'POST', meal).then(
+      function(data) { this.setState({ meals: data });
+    }.bind(this));
   },
   handleStatusChange: function(status) {
-    $.ajax({
-      url: 'orders/' + this.props.id + '.json',
-      dataType: 'json',
-      type: 'PUT',
-      data: status,
-      success: function(data) {
-        this.setState({ status: data.status });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('orders/' + this.props.id + '.json', status, err.toString());
-      }.bind(this)
-    });
+    Luncheon.backend('orders/' + this.props.id  + '.json', 'PUT', status).then(
+      function(data) { this.setState({ status: data.status });
+    }.bind(this));
   },
   render: function() {
     var mealForm;

@@ -9,31 +9,14 @@ var OrderBox = React.createClass({
     this.getOrders({ type: e.target.id });
   },
   getOrders: function(type) {
-    $.ajax({
-      url: 'orders.json',
-      dataType: 'json',
-      data: type,
-      success: function(data) {
-        this.setState({ orders: data });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('orders.json', status, err.toString());
-      }.bind(this)
-    });
+    Luncheon.backend('orders.json', 'GET', type).then(
+      function(data) { this.setState({ orders: data });
+    }.bind(this));
   },
   handleOrderSubmit: function(order) {
-    $.ajax({
-      url: 'orders.json',
-      dataType: 'json',
-      type: 'POST',
-      data: order,
-      success: function(data) {
-        this.setState({ orders: data });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('orders.json', status, err.toString());
-      }.bind(this)
-    });
+    Luncheon.backend('orders.json', 'POST', order).then(
+      function(data) { this.setState({ orders: data });
+    }.bind(this));
   },
   render: function() {
     return (
