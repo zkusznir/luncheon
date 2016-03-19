@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :logged_in
+
   def index
     @orders = params[:type] == 'history' ? Order.history : Order.active
     render json: @orders.to_json

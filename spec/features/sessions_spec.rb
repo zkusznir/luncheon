@@ -21,4 +21,12 @@ feature 'Logging in' do
     click_link 'Log out'
     expect(page).to have_content 'Bye, bye!'
   end
+
+  scenario 'Unauthorized user attempts to request resources' do
+    visit '/orders'
+    expect(page).to have_content 'You have to be logged in to enter!'
+    expect(page).not_to have_content 'New order'
+    visit '/orders/1/meals'
+    expect(page).to have_content 'You have to be logged in to enter!'
+  end
 end
