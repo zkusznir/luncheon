@@ -9,8 +9,7 @@ class MealsController < ApplicationController
                         price: meal_params[:price],
                         order_id: params[:order_id],
                         user: current_user)
-    @meals = Meal.where(order_id: params[:order_id])
-    render json: @meals.to_json
+    render json: @meal.to_json
   end
 
   private
