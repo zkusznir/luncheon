@@ -1,5 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe User do
+  let(:user) { create(:user) }
+
+  it 'has a valid factory' do
+    expect(user).to be_valid
+  end
+
+  it 'is invalid without uid' do
+    user.uid = nil
+    expect(user).to be_invalid
+  end
+
+  it 'is invalid without name' do
+    user.name = nil
+    expect(user).to be_invalid
+  end
 end
