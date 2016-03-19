@@ -17,7 +17,7 @@ Order = React.createClass({
   },
   handleMealSubmit: function(meal) {
     Luncheon.backend('orders/' + this.props.id  + '/meals.json', 'POST', meal).then(
-      function(data) { this.setState({ meals: data });
+      function(data) { this.setState({ meals: this.state.meals.concat(data) });
     }.bind(this));
   },
   handleStatusChange: function(status) {

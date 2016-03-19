@@ -15,7 +15,8 @@ var OrderBox = React.createClass({
   },
   handleOrderSubmit: function(order) {
     Luncheon.backend('orders.json', 'POST', order).then(
-      function(data) { this.setState({ orders: data });
+      function(data) { 
+        this.setState({ orders: this.state.orders.concat(data) });
     }.bind(this));
   },
   render: function() {
