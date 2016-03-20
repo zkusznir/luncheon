@@ -10,7 +10,8 @@ feature 'Orders management' do
 
   scenario 'User visits main page' do
     expect(page).to have_content 'Burger Love'
-    expect(page).to have_content 'Gonzales 21.5'
+    expect(page).to have_content 'Gonzales'
+    expect(page).to have_content '21.5'
   end
 
   scenario 'User adds a new order' do
@@ -46,6 +47,7 @@ feature 'Status change' do
 
   scenario 'User changes order status' do
     expect(page).to have_button 'Add'
+    binding.pry
     select 'Finalized', from: 'order-status'
     expect(page).not_to have_button 'Add'
     expect(page).to have_select 'order-status', selected: 'Finalized'

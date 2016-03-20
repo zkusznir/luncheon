@@ -12,14 +12,14 @@ feature 'Logging in' do
 
   scenario 'User logs in' do
     login
-    expect(page).to have_content 'Hi, John Doe!'
+    expect(page).to have_content 'John Doe'
     expect(User.last.name).to eq 'John Doe'
   end
 
   scenario 'User logs out' do
     login
     click_link 'Log out'
-    expect(page).to have_content 'Bye, bye!'
+    expect(page).to have_content 'You have to be logged in to enter!'
   end
 
   scenario 'Unauthorized user attempts to request resources' do
