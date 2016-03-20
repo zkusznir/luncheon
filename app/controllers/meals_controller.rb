@@ -7,10 +7,10 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meal = current_user.meals.create(name: meal_params[:name],
+    @meal = current_user.meals.new(name: meal_params[:name],
                                       price: meal_params[:price],
-                                      order_id: params[:order_id],
-    render json: @meal.to_json
+                                      order_id: params[:order_id])
+    render json: @meal.to_json if @meal.save
   end
 
   private

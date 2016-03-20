@@ -29,8 +29,8 @@ describe Meal do
 
   it 'can be assigned to the same user within an order only once' do
     meal
-    expect(Order.all.count).to eq 1
-    meal
-    expect(Order.all.count).to eq 1
+    expect(Meal.all.count).to eq 1
+    meal = Meal.new(name: 'Gonzales', price: '21.5', user_id: 1, order_id: 1)
+    expect(meal).not_to be_valid
   end
 end

@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rspec-rails'
 gem 'omniauth-facebook'
 gem 'react-rails', '~> 1.6.0'
+gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'pry'
