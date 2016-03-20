@@ -21,10 +21,16 @@ var OrderBox = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <OrderForm onOrderSubmit={this.handleOrderSubmit} />
-        <button id="active" onClick={this.handleChangeOrdersType}>Active</button>
-        <button id="history" onClick={this.handleChangeOrdersType}>History</button>
+      <div className='order-box'>
+        <div className='order-box__management'>
+          <div className='management__form'>
+            <OrderForm onOrderSubmit={this.handleOrderSubmit} />
+          </div>
+          <div className='management__orders-type'>
+            <button className='btn btn-default' id='active' onClick={this.handleChangeOrdersType}>Active</button>
+            <button className='btn btn-default' id='history' onClick={this.handleChangeOrdersType}>History</button>
+          </div>
+        </div>
         <OrderList orders={this.state.orders} />
       </div>
     );

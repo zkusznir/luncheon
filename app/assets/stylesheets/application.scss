@@ -14,5 +14,49 @@
  *= require_self
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'colors';
+@import 'mixins';
+
+.page {
+  @include flex-container(column);
+  max-width: 1000px;
+  margin: auto;
+  font-family: sans-serif;
+  position: relative;
+}
+
+.page-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  border-bottom: solid 1px black;
+}
+
+.page-header__title {
+  flex-grow: 15;
+  padding-left: 3%;
+  font: bold sans-serif;
+}
+
+.page-header__logout {
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+input {
+  margin: 0px 3px;
+}
+
+.btn {
+  margin: 0px 3px;
+  background-color: $btn-background;
+}
+
+.btn:hover {
+  background-color: $btn-background-hover;
+}

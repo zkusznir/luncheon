@@ -32,18 +32,18 @@ Order = React.createClass({
     }
     var mealNodes = this.state.meals.map(function(meal, index) {
       return (
-        <Meal name={meal.name} price={meal.price} key={index} />
+        <Meal name={meal.name} price={meal.price} key={index} index={index} />
       );
     });
     return (
-      <div className="order">
-        <span>
-          {this.props.name}
+      <div className='order'>
+        <div className='order__title'>
+          <h3><b>{this.props.name}</b></h3>
           <OrderStatusForm status={this.state.status} onStatusChange={this.handleStatusChange} />
-        </span>
-        <ul>
+        </div>
+        <div className='order__meals'>
           {mealNodes}
-        </ul>
+        </div>
         {mealForm}
       </div>
     );

@@ -1,7 +1,10 @@
 var Meal = React.createClass({
   render: function() {
     return (
-      <li>{this.props.name} {this.props.price}</li>
+      <div className='meal'>
+        <span>{this.props.index + 1}. {this.props.name}</span>
+        <span>{this.props.price} zł</span>
+      </div>
     )
   }
 });

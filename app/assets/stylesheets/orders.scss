@@ -1,0 +1,58 @@
+@import 'mixins';
+
+.order-box {
+  @include flex-container(column);
+  margin: 10px 30px;
+}
+
+.order-box__management {
+  @include flex-container(row);
+}
+
+.management__form {
+  flex-grow: 25;
+  justify-content: flex-start;
+}
+
+.management__orders-type {
+  @include flex-container(row);
+  flex-grow: 2;
+  justify-content: flex-end;
+}
+
+#order-form {
+  width: 60%;
+  display: inline;
+}
+
+.order {
+  @include flex-container(column);
+  width: 60%;
+  padding: 20px 0px;
+}
+
+.order__title {
+  @include flex-container(row);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order__meals {
+  margin: 10px;
+  width: 80%;
+}
+
+.meal {
+  @include flex-container(row);
+  justify-content: space-between;
+  width: 80%;
+}
+
+.meal-form {
+  @include flex-container(row);
+  justify-content: space-between;
+}
+
+#meal-form__price {
+  width: 30%;
+}

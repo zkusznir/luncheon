@@ -1,6 +1,6 @@
 var OrderForm = React.createClass({
   getInitialState: function() {
-    return { restaurantName: "" };
+    return { restaurantName: '' };
   },
   handleInputChange: function(e) {
     this.setState({ restaurantName: e.target.value.trim() });
@@ -8,16 +8,16 @@ var OrderForm = React.createClass({
   handleAddOrderClick: function(e) {
     e.preventDefault();
     if (!this.state.restaurantName) return;
-    ReactDOM.findDOMNode(this.refs.body).value = "";
-    this.setState({ restaurantName: "" });
+    ReactDOM.findDOMNode(this.refs.body).value = '';
+    this.setState({ restaurantName: '' });
     this.props.onOrderSubmit({ order: { name: this.state.restaurantName } });
   },
   render: function() {
     return (
-      <form onSubmit={this.handleAddOrderClick}>
-        <label>New order</label>
-        <input id="order-form" placeholder="Restaurant name" onChange={this.handleInputChange} ref="body" />
-        <input type="submit" value="Create order" />
+      <form className='inline-form' onSubmit={this.handleAddOrderClick}>
+        <input className='form-control' id='order-form' placeholder='Restaurant name'
+               onChange={this.handleInputChange} ref='body' />
+        <input className='btn btn-default' type='submit' value='Create order' />
       </form>
     );
   }
