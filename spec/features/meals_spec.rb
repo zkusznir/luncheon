@@ -44,4 +44,9 @@ feature 'Meals management' do
     click_button 'Add'
     expect(page).not_to have_content 'Price has to be numerical!'
   end
+
+  scenario 'User submits a meal with price of more than 2 decimal places' do
+    submit_meal_form('Classic', '18.2222')
+    expect(page).to have_content '18.22 zł'
+  end
 end

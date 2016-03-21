@@ -3,7 +3,7 @@ var Meal = React.createClass({
     return (
       <div className='meal'>
         <span>{this.props.index + 1}. {this.props.name}</span>
-        <span>{this.props.price} zł</span>
+        <span>{Number(this.props.price).toFixed(2)} zł</span>
       </div>
     )
   }
