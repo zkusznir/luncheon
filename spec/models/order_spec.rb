@@ -17,6 +17,11 @@ describe Order do
     expect(order).not_to be_valid
   end
 
+  it 'is invalid with strange status' do
+    order.status = 'Any'
+    expect(order).not_to be_valid
+  end
+
   context 'when actove/history scope is involved' do
     before(:each) do
       2.times { create(:order) }
