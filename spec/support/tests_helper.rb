@@ -1,8 +1,8 @@
 module TestsHelper
-  def configure_omniauth
+  def configure_omniauth(uid = '123456789', name = 'John Doe')
     OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      uid: '123456789',
-      info: { name: 'John Doe' }
+      uid: uid,
+      info: { name: name }
     )
   end
 

@@ -52,11 +52,15 @@ input {
   margin: 0px 3px;
 }
 
-.btn {
+.btn-default {
   margin: 0px 3px;
   background-color: $btn-background;
 }
 
-.btn:hover {
+.btn-default:hover {
   background-color: $btn-background-hover;
+}
+
+.orders-type {
+  background-color: white;
 }

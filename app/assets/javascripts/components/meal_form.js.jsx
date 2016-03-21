@@ -16,10 +16,13 @@ var MealForm = React.createClass({
   },
   validInputs: function() {
     if (!this.state.name || !this.state.price) {
-      this.setState({ errorMessage: 'Please fill in both name and price fields!' });
+      this.setState({ errorMessage: 'Please fill in both name and price fields' });
       return false;
     } else if (!parseInt(this.state.price)) {
-      this.setState({ errorMessage: 'Price has to be numerical!' });
+      this.setState({ errorMessage: 'Price has to be numerical' });
+      return false;
+    } else if (parseInt(this.state.price) <= 0) {
+      this.setState({ errorMessage: 'Price has to be greater than 0' });
       return false;
     } else {
       return true;

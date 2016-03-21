@@ -1,10 +1,20 @@
 Order = React.createClass({
   getInitialState: function() {
-    return { status: null, meals: [], errorMessage: '' };
+    return { status: null, meals: [], totalPrice: 0.0, errorMessage: '' };
   },
   componentWillMount: function() {
     this.setState({ status: this.props.status });
     this.getMeals(this.props.id);
+  },
+  componentWillUpdate: function() {
+    this.evaluateTotalPrice();
+  },
+  evaluateTotalPrice: function() {
+    var sum = 0.0;
+    for (var i = 0; i < this.state.meals.length; i++) {
+      sum += parseFloat(this.state.meals[i].price);
+    }
+    return sum;
   },
   componentWillReceiveProps: function(nextProps) {
     this.setState({ status: nextProps.status });
@@ -12,16 +22,20 @@ Order = React.createClass({
   },
   getMeals: function(order_id) {
     Luncheon.backend('orders/' + order_id  + '/meals.json', 'GET', '').then(
-      function(data) { this.setState({ meals: data });
+      function(data) {
+        this.setState({ meals: data });
+        this.setState({ totalPrice: this.evaluateTotalPrice() });
     }.bind(this));
   },
   handleMealSubmit: function(meal) {
     Luncheon.backend('orders/' + this.props.id  + '/meals.json', 'POST', meal).then(
       function(data) {
-        if (data.error)
+        if (data.error) {
           this.setState({ errorMessage: 'Oops! You have already ordered something here!' })
-        else
+        } else {
           this.setState({ meals: this.state.meals.concat(data), errorMessage: '' });
+          this.setState({ totalPrice: this.state.totalPrice + parseFloat(data.price) });
+        }
     }.bind(this));
   },
   handleStatusChange: function(status) {
@@ -52,6 +66,8 @@ Order = React.createClass({
         <div className='order__meals'>
           {errorMessage}
           {mealNodes}
+          <hr />
+          <div>Total: {Number(this.state.totalPrice).toFixed(2)} zł</div>
         </div>
         <div>
           {mealForm}

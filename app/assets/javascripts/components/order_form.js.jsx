@@ -12,7 +12,7 @@ var OrderForm = React.createClass({
   },
   validInput: function() {
     if (this.state.restaurantName == '') {
-      this.setState({ errorMessage: 'Please fill in the restaurant name!' });
+      this.setState({ errorMessage: 'Please fill in the restaurant name' });
       return false;
     } else {
       return true;

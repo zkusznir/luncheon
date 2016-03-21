@@ -32,10 +32,10 @@ feature 'Orders management' do
 
   scenario 'User submits an order with empty restaurant name' do
     click_button 'Create order'
-    expect(page).to have_content 'Please fill in the restaurant name!'
+    expect(page).to have_content 'Please fill in the restaurant name'
     fill_in 'Restaurant name', with: 'Osiem misek'
     click_button 'Create order'
-    expect(page).not_to have_content 'Please fill in the restaurant name!'
+    expect(page).not_to have_content 'Please fill in the restaurant name'
   end
 end
 
