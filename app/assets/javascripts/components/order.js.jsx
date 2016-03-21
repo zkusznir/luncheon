@@ -1,6 +1,6 @@
 Order = React.createClass({
   getInitialState: function() {
-    return { status: null, meals: [] };
+    return { status: null, meals: [], errorMessage: '' };
   },
   componentWillMount: function() {
     this.setState({ status: this.props.status });
@@ -17,7 +17,11 @@ Order = React.createClass({
   },
   handleMealSubmit: function(meal) {
     Luncheon.backend('orders/' + this.props.id  + '/meals.json', 'POST', meal).then(
-      function(data) { this.setState({ meals: this.state.meals.concat(data) });
+      function(data) {
+        if (data.error)
+          this.setState({ errorMessage: 'Oops! You have already ordered something here!' })
+        else
+          this.setState({ meals: this.state.meals.concat(data), errorMessage: '' });
     }.bind(this));
   },
   handleStatusChange: function(status) {
@@ -27,8 +31,12 @@ Order = React.createClass({
   },
   render: function() {
     var mealForm;
+    var errorMessage;
     if (this.state.status != 'Finalized') {
       mealForm = <MealForm onMealSubmit={this.handleMealSubmit} />;
+    }
+    if (this.state.errorMessage != '') {
+      errorMessage = <b className='info' ref='errors'>{this.state.errorMessage}</b>;
     }
     var mealNodes = this.state.meals.map(function(meal, index) {
       return (
@@ -42,9 +50,12 @@ Order = React.createClass({
           <OrderStatusForm status={this.state.status} onStatusChange={this.handleStatusChange} />
         </div>
         <div className='order__meals'>
+          {errorMessage}
           {mealNodes}
         </div>
-        {mealForm}
+        <div>
+          {mealForm}
+        </div>
       </div>
     );
   }

@@ -47,7 +47,6 @@ feature 'Status change' do
 
   scenario 'User changes order status' do
     expect(page).to have_button 'Add'
-    binding.pry
     select 'Finalized', from: 'order-status'
     expect(page).not_to have_button 'Add'
     expect(page).to have_select 'order-status', selected: 'Finalized'

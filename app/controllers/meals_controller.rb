@@ -10,7 +10,11 @@ class MealsController < ApplicationController
     @meal = current_user.meals.new(name: meal_params[:name],
                                       price: meal_params[:price],
                                       order_id: params[:order_id])
-    render json: @meal.to_json if @meal.save
+    if @meal.save
+      render json: @meal.to_json
+    else
+      render json: { error: 'Fuck' }.to_json
+    end
   end
 
   private

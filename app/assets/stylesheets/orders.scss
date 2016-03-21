@@ -58,6 +58,11 @@
   color: $error-msg;
 }
 
+.info {
+  padding: 5px;
+  color: $info-msg;
+}
+
 #meal-form__price {
   width: 30%;
 }
