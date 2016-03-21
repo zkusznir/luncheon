@@ -11,7 +11,7 @@ feature 'Meals management' do
     expect(page).to have_css '#meal-form__name', text: ''
     expect(page).to have_css '#meal-form__price', text: ''
     expect(page).to have_content 'Classic'
-    expect(page).to have_content '18.5 zł'
+    expect(page).to have_content '18.50 zł'
   end
 
   scenario 'User cannot add a meal to the same order more than once' do
@@ -19,7 +19,7 @@ feature 'Meals management' do
     submit_meal_form('Classic', '18.5')
     expect(page).to have_content 'You have already ordered something here!'
     expect(page).to have_content 'Classic', count: 1
-    expect(page).to have_content '18.5 zł', count: 1
+    expect(page).to have_content '18.50 zł', count: 1
   end
 
   scenario 'User cannot add a meal to closed order' do
