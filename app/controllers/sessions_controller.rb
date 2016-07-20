@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def create
+    binding.pry
     if auth_hash
       user = User.create_with(name: auth_hash['info']['name']).find_or_create_by(uid: auth_hash['uid'])
       session[:id] = user.uid
